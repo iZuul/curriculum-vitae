@@ -107,9 +107,8 @@ export default {
 			]
     }
 	},
-	mounted() {
+	beforeMount() {
 		const self = this;
-		console.log(window.innerWidth)
 		if (window.innerWidth <= 767) {
 			self.columnWidth1 = 12
 			self.columnWidth2 = 12
