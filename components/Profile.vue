@@ -31,9 +31,6 @@ export default {
     return {
       profile: profile
     }
-  },
-  mounted() {
-    console.log(this.$refs['image'])
   }
 }
 </script>

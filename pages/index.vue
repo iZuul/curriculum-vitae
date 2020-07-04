@@ -1,23 +1,28 @@
 <template>
   <div class="main">
-    <vs-row class="h-100">
-			<vs-col :vs-w="columnWidth1" type="flex" vs-align="center">
-				<Profile class="px-3"/>
-			</vs-col>
-			<vs-col :vs-w="columnWidth2" l type="flex" vs-align="center">
-				<Card class="px-3" header="Personal Profile" :description="profileDescription"/>
-				<Card class="px-3" header="Carrer Summary" :longLists="careerList" />
-			</vs-col>
-			<vs-col :vs-w="columnWidth3" l type="flex" vs-align="center">
-				<Card class="px-3" header="Education" :shortLists="eduactionList"/>
-				<Card class="px-3" header="Skills" :skillLists="skillLists"/>
-			</vs-col>
-		</vs-row>
-		<vs-row>
-			<vs-col>
-				<ListButton></ListButton>
-			</vs-col>
-		</vs-row>
+		<template v-if="loading">
+			<div class="light"></div>
+		</template>
+		<template v-else>
+			<vs-row class="h-100">
+				<vs-col :vs-w="columnWidth1" type="flex" vs-align="center">
+					<Profile class="px-3"/>
+				</vs-col>
+				<vs-col :vs-w="columnWidth2" l type="flex" vs-align="center">
+					<Card class="px-3" header="Personal Profile" :description="profileDescription"/>
+					<Card class="px-3" header="Carrer Summary" :longLists="careerList" />
+				</vs-col>
+				<vs-col :vs-w="columnWidth3" l type="flex" vs-align="center">
+					<Card class="px-3" header="Education" :shortLists="eduactionList"/>
+					<Card class="px-3" header="Skills" :skillLists="skillLists"/>
+				</vs-col>
+			</vs-row>
+			<vs-row>
+				<vs-col>
+					<ListButton></ListButton>
+				</vs-col>
+			</vs-row>
+		</template>
   </div>
 </template>
 
@@ -43,6 +48,7 @@ export default {
 	},
   data(){
     return {
+			loading: true,
 			columnWidth1:4,
 			columnWidth2:4,
 			columnWidth3:4,
@@ -108,7 +114,10 @@ export default {
     }
 	},
 	beforeMount() {
+	},
+	mounted() {
 		const self = this;
+		self.$vs.loading()
 		if (window.innerWidth <= 767) {
 			self.columnWidth1 = 12
 			self.columnWidth2 = 12
@@ -125,6 +134,11 @@ export default {
 			self.columnWidth3 = 4
 
 		}
+
+		setTimeout(() => {
+			self.$vs.loading.close()
+			self.loading = false
+		}, 500)
 
 		function resize() {
 			if (window.innerWidth <= 767) {
@@ -143,7 +157,6 @@ export default {
 				self.columnWidth3 = 4;
 			}
 		}
-
 		window.onresize = resize;
 	}
 }
