@@ -130,8 +130,7 @@ export default {
 		const self = this;
 		self.$vs.loading()
 		if (window.innerWidth <= 767) {
-			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 12
-			self.columnCardWork = 6
+			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = self.columnCardWork = 12
 		}
 		else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
 			self.columnWidth1 = 12
@@ -150,8 +149,7 @@ export default {
 
 		function resize() {
 			if (window.innerWidth <= 767) {
-				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 12
-				self.columnCardWork = 6
+				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = self.columnCardWork = 12
 			}
 			else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
 				self.columnWidth1 = 12
