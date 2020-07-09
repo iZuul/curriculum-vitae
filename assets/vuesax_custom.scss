@@ -6,3 +6,7 @@
 .no-border .vs-list--item{
   border-bottom: none !important;
 }
+
+.vs-collapse-open-fullheight .vs-collapse-item--content {
+  max-height: 100% !important;
+}

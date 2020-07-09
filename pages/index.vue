@@ -4,6 +4,11 @@
 			<div class="light"></div>
 		</template>
 		<template v-else>
+			<vs-row>
+				<vs-col>
+					<ListButton style="z-index:1000;"></ListButton>
+				</vs-col>
+			</vs-row>
 			<vs-row class="h-100">
 				<vs-col :vs-w="columnWidth1" type="flex" vs-align="center">
 					<Profile class="px-3"/>
@@ -19,7 +24,7 @@
 			</vs-row>
 			<vs-row>
 				<vs-col>
-					<ListButton></ListButton>
+					<ListWorks :columnCardWork="columnCardWork" class="px-3 pt-3"/>
 				</vs-col>
 			</vs-row>
 		</template>
@@ -30,12 +35,14 @@
 import Profile from '@/components/Profile'
 import Card from '@/components/Card'
 import ListButton from '@/components/ListButton'
+import ListWorks from '@/components/ListWorks'
 
 export default {
 	components: {
 		Profile,
 		Card,
-		ListButton
+		ListButton,
+		ListWorks
 	},
 	head() {
 		return {
@@ -43,7 +50,10 @@ export default {
       meta: [
 				{ hid: 'description', name: 'description', content: 'Resume dan Profil Muhammad Zulfa Dhiaulhaq, Junior Frontend Web Developer' },
 				{ hid: 'author', name: 'author', content: 'Muhammad Zulfa Dhiaulhaq' }
-      ]
+			],
+			htmlAttrs: {
+				lang: 'en'
+			}
     }
 	},
   data(){
@@ -116,23 +126,21 @@ export default {
 	beforeMount() {
 	},
 	mounted() {
+		console.log(process.env.baseUrl)
 		const self = this;
 		self.$vs.loading()
 		if (window.innerWidth <= 767) {
-			self.columnWidth1 = 12
-			self.columnWidth2 = 12
-			self.columnWidth3 = 12
+			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 12
+			self.columnCardWork = 6
 		}
 		else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
 			self.columnWidth1 = 12
-			self.columnWidth2 = 6
-			self.columnWidth3 = 6
+			self.columnWidth2 = self.columnWidth3 = 6
+			self.columnCardWork = 4
 		}
 		else {
-			self.columnWidth1 = 4
-			self.columnWidth2 = 4
-			self.columnWidth3 = 4
-
+			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 4
+			self.columnCardWork = 4
 		}
 
 		setTimeout(() => {
@@ -142,19 +150,17 @@ export default {
 
 		function resize() {
 			if (window.innerWidth <= 767) {
-				self.columnWidth1 = 12
-				self.columnWidth2 = 12
-				self.columnWidth3 = 12				
+				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 12
+				self.columnCardWork = 6
 			}
 			else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
 				self.columnWidth1 = 12
-				self.columnWidth2 = 6
-				self.columnWidth3 = 6
+				self.columnWidth2 = self.columnWidth3 = 6
+				self.columnCardWork = 4
 			}
 			else {
-				self.columnWidth1 = 4;
-				self.columnWidth2 = 4;
-				self.columnWidth3 = 4;
+				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 4;
+				self.columnCardWork = 4
 			}
 		}
 		window.onresize = resize;
