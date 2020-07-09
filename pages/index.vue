@@ -24,7 +24,7 @@
 			</vs-row>
 			<vs-row>
 				<vs-col>
-					<ListWorks :columnCardWork="columnCardWork" class="px-3 pt-3"/>
+					<ListWorks :columnCardWork="columnCardWork" :styleWorks="styleWorks" class="px-3 pt-3"/>
 				</vs-col>
 			</vs-row>
 		</template>
@@ -131,15 +131,18 @@ export default {
 		self.$vs.loading()
 		if (window.innerWidth <= 767) {
 			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = self.columnCardWork = 12
+			self.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
 		}
 		else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
 			self.columnWidth1 = 12
 			self.columnWidth2 = self.columnWidth3 = 6
 			self.columnCardWork = 4
+			self.styleWorks = ''
 		}
 		else {
 			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 4
 			self.columnCardWork = 4
+			self.styleWorks = ''
 		}
 
 		setTimeout(() => {
@@ -150,15 +153,18 @@ export default {
 		function resize() {
 			if (window.innerWidth <= 767) {
 				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = self.columnCardWork = 12
+				self.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
 			}
 			else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
 				self.columnWidth1 = 12
 				self.columnWidth2 = self.columnWidth3 = 6
 				self.columnCardWork = 4
+				self.styleWorks = ''
 			}
 			else {
 				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 4;
 				self.columnCardWork = 4
+				self.styleWorks = ''
 			}
 		}
 		window.onresize = resize;

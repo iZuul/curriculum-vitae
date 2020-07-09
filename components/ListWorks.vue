@@ -5,7 +5,7 @@
         <div slot="header">
           <h4>My Work</h4>
         </div>
-        <div style="max-height: 25rem; overflow-y: scroll; overflow-x: hidden;">
+        <div :style="styleWorks">
           <vs-row>
             <vs-col :vs-w="columnCardWork" class="px-3 pb-2 py-4" v-for="(item, index) in listProject" :key="index">
               <vs-card fixedHeight class="zoom">
@@ -41,7 +41,8 @@ import imageMedicalWebApp from '@/static/images/medical-web-app.png'
 
 export default {
   props:{
-    columnCardWork: Number
+    columnCardWork: Number,
+    styleWorks: String
   },
   data() {
     return {
