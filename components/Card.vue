@@ -10,27 +10,30 @@
         <span v-if="description !== undefined">
           {{ description }}
         </span>
+
         <div v-if="shortLists !== undefined">
           <vs-list>
             <vs-list-item v-for="(item, index) in shortLists" :key="index" :title="`${item.place} | ${item.from_year} - ${item.until_year}`" :subtitle="item.major"></vs-list-item>
           </vs-list>
         </div>
+
         <div v-if="longLists !== undefined">
           <vs-collapse>
-            <vs-collapse-item v-for="(item, index) in longLists" :key="index">
+            <vs-collapse-item v-for="({ content }, index) in longLists" :key="index">
               <div slot="header" class="pr-2 font-bold">
-                {{item.text}} - {{item.year}}
+                {{content.name}} - {{content.year}}
               </div>
               <div>
-                {{item.description}}
+                {{content.short_description}}
               </div>
             </vs-collapse-item>
           </vs-collapse>
         </div>
+
         <div v-if="skillLists !== undefined">
-          <div v-for="(item, index) in skillLists" :key="index">
-            <span>{{item.name}}</span>
-            <vs-progress :percent="item.percent" :color="item.color" :height="item.height"></vs-progress>
+          <div v-for="({content}, index) in skillLists" :key="index">
+            <span>{{content.name}}</span>
+            <vs-progress :percent="Number(content.value)" :color="content.color"></vs-progress>
           </div>
         </div>
       </div>
@@ -46,6 +49,6 @@ export default {
     shortLists: Array,
     longLists: Array,
     skillLists:  Array
-  }
+  },
 }
 </script>
