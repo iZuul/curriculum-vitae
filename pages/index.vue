@@ -1,8 +1,10 @@
 <template>
   <div class="main">
+		
 		<template v-if="loading">
 			<div class="light"></div>
 		</template>
+
 		<template v-else>
 			<vs-row>
 				<vs-col>
@@ -15,16 +17,20 @@
 				</vs-col>
 				<vs-col :vs-w="columnWidth2" l type="flex" vs-align="center">
 					<Card class="px-3" header="Personal Profile" :description="profileDescription"/>
-					<Card class="px-3" header="Carrer Summary" :longLists="careerList" />
+					<Card class="px-3" header="Education" :shortLists="eduactionList"/>
 				</vs-col>
 				<vs-col :vs-w="columnWidth3" l type="flex" vs-align="center">
-					<Card class="px-3" header="Education" :shortLists="eduactionList"/>
-					<Card class="px-3" header="Skills" :skillLists="skillLists"/>
+					<Card class="px-3" header="Skills" :skillLists="skills.data"/>
 				</vs-col>
 			</vs-row>
 			<vs-row>
 				<vs-col>
-					<ListWorks :columnCardWork="columnCardWork" :styleWorks="styleWorks" class="px-3 pt-3"/>
+					<Card class="px-3" header="Carrer Summary" :longLists="careers.data" />
+				</vs-col>
+			</vs-row>
+			<vs-row>
+				<vs-col>
+					<ListWorks :columnCardWork="columnCardWork" :styleWorks="styleWorks" class="px-3 pt-3" :listWorks="portofolio.data"/>
 				</vs-col>
 			</vs-row>
 		</template>
@@ -62,24 +68,7 @@ export default {
 			columnWidth1:4,
 			columnWidth2:4,
 			columnWidth3:4,
-			profileDescription: "I born in Surakarta and grew up there. Want to become a professional front end developer who can realize various kinds of designs",
-			careerList: [
-				{
-					text: 'Frontend Developer in TraceYuk Research Team',
-					year: '2020',
-					description: 'Developing Admin Website For TracYuk Mobile App',
-				},
-				{
-					text: 'Frontend Developer Intern in Fakultas Teknik UGM',
-					year: '2019',
-					description: 'Developing one of Administation Website for Fakultas Teknik Universitas Gadjah Mada',
-				},
-				{
-					text: '1st Champion Of Speedhack',
-					year: '2018',
-					description: 'Built an Prototype Android Mobile App Tracking Trans Jogja Bus'
-				}
-			],
+			profileDescription: "I was born in Surakarta and grew up there. Want to become a professional front end developer who can realize various kinds of designs",
 			eduactionList: [
 				{
 					place: 'Universitas Gadjah Mada',
@@ -94,80 +83,83 @@ export default {
 					major: '',
 				}
 			],
-			skillLists: [
-				{
-					name: 'Vue',
-					percent: 85,
-					color:'success'
-				},
-				{
-					name: 'Bootstrap',
-					percent: 80,
-					color:'primary'
-				},
-				{
-					name: 'JavaScript',
-					percent: 80,
-					color:'warning'
-				},
-				{
-					name: 'HTML',
-					percent: 85,
-					color: 'danger'
-				},
-				{
-					name: 'CSS',
-					percent: 75,
-					color:'primary'
-				}
-			]
     }
 	},
-	beforeMount() {
-	},
 	mounted() {
-		console.log(process.env.baseUrl)
-		const self = this;
-		self.$vs.loading()
+		this.$vs.loading()
 		if (window.innerWidth <= 767) {
-			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = self.columnCardWork = 12
-			self.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
+			this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = this.columnCardWork = 12
+			this.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
 		}
 		else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
-			self.columnWidth1 = 12
-			self.columnWidth2 = self.columnWidth3 = 6
-			self.columnCardWork = 4
-			self.styleWorks = ''
+			this.columnWidth1 = 12
+			this.columnWidth2 = this.columnWidth3 = 6
+			this.columnCardWork = 4
+			this.styleWorks = ''
 		}
 		else {
-			self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 4
-			self.columnCardWork = 4
-			self.styleWorks = ''
+			this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = 4
+			this.columnCardWork = 4
+			this.styleWorks = ''
 		}
 
 		setTimeout(() => {
-			self.$vs.loading.close()
-			self.loading = false
+			this.$vs.loading.close()
+			this.loading = false
 		}, 500)
 
 		function resize() {
 			if (window.innerWidth <= 767) {
-				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = self.columnCardWork = 12
-				self.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
+				this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = this.columnCardWork = 12
+				this.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
 			}
 			else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
-				self.columnWidth1 = 12
-				self.columnWidth2 = self.columnWidth3 = 6
-				self.columnCardWork = 4
-				self.styleWorks = ''
+				this.columnWidth1 = 12
+				this.columnWidth2 = this.columnWidth3 = 6
+				this.columnCardWork = 4
+				this.styleWorks = ''
 			}
 			else {
-				self.columnWidth1 = self.columnWidth2 = self.columnWidth3 = 4;
-				self.columnCardWork = 4
-				self.styleWorks = ''
+				this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = 4;
+				this.columnCardWork = 4
+				this.styleWorks = ''
 			}
 		}
 		window.onresize = resize;
+	},
+	async asyncData(context) {
+		const response_skills = await context.app.$storyapi.get('cdn/stories', {
+			version: 'publish',
+			starts_with: 'skills/'
+		})
+
+		const response_careers = await context.app.$storyapi.get('cdn/stories', {
+			version: 'publish',
+			starts_with: 'careers/'
+		})
+
+		const response_portofolio = await context.app.$storyapi.get('cdn/stories', {
+			version: 'publish',
+			starts_with: 'blog/'
+		})
+
+		const portofolio = {
+			data: response_portofolio.data.stories
+		}
+
+		const skills = {
+			data: response_skills.data.stories
+		}
+		
+		const careers = {
+			data: response_careers.data.stories
+		}
+
+		return {
+			portofolio,
+			skills,
+			careers
+		}
 	}
 }
 </script>
