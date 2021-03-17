@@ -61,6 +61,14 @@ export default {
   */
   modules: [
     // '@nuxtjs/sitemap'
+    [
+      'storyblok-nuxt',
+      {
+        accessToken: process.env.API_KEY_STORY_BLOK,
+        cacheProvider: 'memory'
+      }
+    ],
+    ['@nuxtjs/dotenv']
   ],
   // sitemap: {
 
