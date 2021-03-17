@@ -13,7 +13,6 @@
       <vs-row justify="center">
         <vs-col>
           <vs-list>
-            <vs-list-item class="none-border" title="Phone" subtitle="081393004304"></vs-list-item>
             <vs-list-item class="none-border" title="Email" subtitle="zdhiaulhaq20@gmail.com"></vs-list-item>
             <vs-list-item class="none-border" title="Linkedin" subtitle="Muhammad Dhiaulhaq"></vs-list-item>
             <vs-list-item class="none-border" title="Address" subtitle="Yogyakarta"></vs-list-item>
@@ -34,6 +33,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>
