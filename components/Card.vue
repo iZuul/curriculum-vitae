@@ -33,7 +33,7 @@
         <div v-if="skillLists !== undefined">
           <div v-for="({content}, index) in skillLists" :key="index">
             <span>{{content.name}}</span>
-            <vs-progress :percent="Number(content.value)" :color="content.color"></vs-progress>
+            <vs-progress :percent="0" color="#888"></vs-progress>
           </div>
         </div>
       </div>

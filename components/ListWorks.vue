@@ -6,7 +6,7 @@
       </div>
       <div :style="styleWorks">
         <vs-row>
-          <vs-col :vs-w="columnCardWork" class="px-3 pb-2 py-4" v-for="({ content }, index) in listWorks" :key="index">
+          <vs-col :vs-lg="6" :vs-sm="12" :vs-xs="12" class="px-3 pb-2 py-4" v-for="({ content }, index) in listWorks" :key="index">
             <vs-card fixedHeight class="zoom">
               <div slot="header">
                 <h3>

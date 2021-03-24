@@ -12,14 +12,14 @@
 				</vs-col>
 			</vs-row>
 			<vs-row class="h-100">
-				<vs-col :vs-w="columnWidth1" type="flex" vs-align="center">
+				<vs-col :vs-lg="4" :vs-sm="12" :vs-xs="12" type="flex" vs-align="center">
 					<Profile class="px-3"/>
 				</vs-col>
-				<vs-col :vs-w="columnWidth2" l type="flex" vs-align="center">
+				<vs-col :vs-lg="4" :vs-sm="6" :vs-xs="12" l type="flex" vs-align="center">
 					<Card class="px-3" header="Personal Profile" :description="profileDescription"/>
 					<Card class="px-3" header="Education" :shortLists="eduactionList"/>
 				</vs-col>
-				<vs-col :vs-w="columnWidth3" l type="flex" vs-align="center">
+				<vs-col :vs-lg="4" :vs-sm="6" :vs-xs="12" l type="flex" vs-align="center">
 					<Card class="px-3" header="Skills" :skillLists="skills.data"/>
 				</vs-col>
 			</vs-row>
@@ -30,7 +30,7 @@
 			</vs-row>
 			<vs-row>
 				<vs-col>
-					<ListWorks :columnCardWork="columnCardWork" :styleWorks="styleWorks" class="px-3 pt-3" :listWorks="portofolio.data"/>
+					<ListWorks :styleWorks="styleWorks" class="px-3 pt-3" :listWorks="portofolio.data"/>
 				</vs-col>
 			</vs-row>
 		</template>
@@ -65,9 +65,6 @@ export default {
   data(){
     return {
 			loading: true,
-			columnWidth1:4,
-			columnWidth2:4,
-			columnWidth3:4,
 			profileDescription: "I was born in Surakarta and grew up there. Want to become a professional front end developer who can realize various kinds of designs",
 			eduactionList: [
 				{
@@ -87,45 +84,11 @@ export default {
 	},
 	mounted() {
 		this.$vs.loading()
-		if (window.innerWidth <= 767) {
-			this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = this.columnCardWork = 12
-			this.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
-		}
-		else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
-			this.columnWidth1 = 12
-			this.columnWidth2 = this.columnWidth3 = 6
-			this.columnCardWork = 4
-			this.styleWorks = ''
-		}
-		else {
-			this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = 4
-			this.columnCardWork = 4
-			this.styleWorks = ''
-		}
 
 		setTimeout(() => {
 			this.$vs.loading.close()
 			this.loading = false
 		}, 500)
-
-		function resize() {
-			if (window.innerWidth <= 767) {
-				this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = this.columnCardWork = 12
-				this.styleWorks = `max-height: 25rem; overflow-y: scroll; overflow-x: hidden;`
-			}
-			else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
-				this.columnWidth1 = 12
-				this.columnWidth2 = this.columnWidth3 = 6
-				this.columnCardWork = 4
-				this.styleWorks = ''
-			}
-			else {
-				this.columnWidth1 = this.columnWidth2 = this.columnWidth3 = 4;
-				this.columnCardWork = 4
-				this.styleWorks = ''
-			}
-		}
-		window.onresize = resize;
 	},
 	async asyncData(context) {
 		const response_skills = await context.app.$storyapi.get('cdn/stories', {
