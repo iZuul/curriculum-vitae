@@ -1,0 +1,23 @@
+categories:
+  - category: Frontend
+    items:
+      - TypeScript
+      - React
+      - Next.js
+      - Vue.js
+      - Nuxt.js
+      - Astro
+      - Material UI
+      - Tailwind CSS
+      - HTML & CSS
+  - category: Backend
+    items:
+      - Node.js
+      - Bun
+      - Express
+      - PostgreSQL
+      - REST API
+  - category: Tools
+    items:
+      - Git
+      - Docker

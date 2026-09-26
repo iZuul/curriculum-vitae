@@ -1,20 +1,30 @@
-# cv
+# Portfolio — iZuul
 
-## Build Setup
+Web portfolio built with [Astro](https://astro.build) and [Keystatic CMS](https://keystatic.com).
+
+## Author
+- **Name:** iZuul
+- **Email:** zdhiaulhaq20@gmail.com
+- **Website:** [https://github.com/iZuul](https://github.com/iZuul)
+
+## Tech Stack
+- **Framework:** Astro 5 (Server output with `@astrojs/vercel`)
+- **Styling:** Tailwind CSS v4
+- **CMS:** Keystatic (Local mode)
+- **Deployment:** Vercel
+
+## Getting Started
 
 ```bash
-# install dependencies
-$ npm install
+# Install dependencies
+npm install
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+# Run local development server
+npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+# Open Keystatic Admin CMS
+# http://localhost:4321/keystatic
 
-# generate static project
-$ npm run generate
+# Build for production
+npm run build
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
