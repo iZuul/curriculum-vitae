@@ -1,0 +1,22 @@
+categories:
+  - category: Frontend
+    items:
+      - TypeScript
+      - React
+      - Vue.js
+      - Astro
+      - Tailwind CSS
+      - HTML & CSS
+  - category: Backend
+    items:
+      - Node.js
+      - Express
+      - PostgreSQL
+      - REST API
+  - category: Tools & Infra
+    items:
+      - Git
+      - Docker
+      - Linux
+      - Figma
+      - VS Code

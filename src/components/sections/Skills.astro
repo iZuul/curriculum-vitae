@@ -1,0 +1,53 @@
+---
+interface SkillCategory {
+  category: string;
+  items: string[];
+}
+
+interface Props {
+  categories?: SkillCategory[];
+}
+
+const { categories = [] } = Astro.props;
+---
+
+<section id="skills" class="py-24 px-6 border-t border-zinc-100 dark:border-zinc-900 transition-colors duration-300">
+  <div class="max-w-5xl mx-auto">
+    <!-- Section label -->
+    <p class="font-mono text-xs tracking-widest uppercase text-zinc-400 dark:text-zinc-600 mb-12">
+      02 / Skills
+    </p>
+
+    <div class="grid md:grid-cols-[280px_1fr] gap-16 items-start">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          Tech Stack
+        </h2>
+        <p class="mt-4 text-zinc-500 dark:text-zinc-400 leading-relaxed">
+          Technologies and tools I work with regularly.
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        {categories.length > 0 ? (
+          categories.map((cat) => (
+            <div>
+              <h3 class="font-mono text-xs tracking-widest uppercase text-zinc-400 dark:text-zinc-600 mb-4">
+                {cat.category}
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                {cat.items.map((skill) => (
+                  <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p class="text-zinc-400 dark:text-zinc-600">No skills added yet.</p>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
