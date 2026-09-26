@@ -31,6 +31,11 @@ const skills = await reader.singletons.skills.read();
     />
     <About
       bio={about?.bio ?? undefined}
+      greeting={about?.greeting ?? undefined}
+      location={about?.location ?? undefined}
+      education={about?.education ?? undefined}
+      focus={about?.focus ?? undefined}
+      status={about?.status ?? undefined}
       email={about?.email ?? undefined}
       github={about?.github ?? undefined}
       linkedin={about?.linkedin ?? undefined}
@@ -42,6 +47,8 @@ const skills = await reader.singletons.skills.read();
       email={about?.email ?? undefined}
       github={about?.github ?? undefined}
       linkedin={about?.linkedin ?? undefined}
+      heading={about?.contact_heading ?? undefined}
+      description={about?.contact_description ?? undefined}
     />
   </main>
   <Footer name={about?.name} />

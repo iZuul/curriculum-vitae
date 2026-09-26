@@ -1,6 +1,11 @@
 ---
 interface Props {
   bio?: string;
+  greeting?: string;
+  location?: string;
+  education?: string;
+  focus?: string;
+  status?: string;
   email?: string;
   github?: string;
   linkedin?: string;
@@ -8,7 +13,7 @@ interface Props {
   photo?: string;
 }
 
-const { bio, email, github, linkedin, twitter, photo } = Astro.props;
+const { bio, greeting, location, education, focus, status, email, github, linkedin, twitter, photo } = Astro.props;
 
 const socialLinks = [
   {
@@ -34,7 +39,10 @@ const socialLinks = [
 ].filter((link) => link.href && link.href !== '');
 ---
 
-<section id="about" class="py-24 px-6 border-t border-zinc-100 dark:border-zinc-900 transition-colors duration-300">
+<section
+  id="about"
+  class="py-24 px-6 border-t border-zinc-100 dark:border-zinc-900 transition-colors duration-300"
+>
   <div class="max-w-5xl mx-auto">
     <!-- Section label -->
     <p class="font-mono text-xs tracking-widest uppercase text-zinc-400 dark:text-zinc-600 mb-12">
@@ -84,7 +92,7 @@ const socialLinks = [
       <!-- Bio -->
       <div class="space-y-6">
         <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-          Hey, I'm Zulfa 👋
+          {greeting ?? 'Hey there!'}
         </h2>
         {bio ? (
           <div class="space-y-4">
@@ -102,22 +110,30 @@ const socialLinks = [
 
         <!-- Quick facts -->
         <div class="grid grid-cols-2 gap-4 pt-4">
-          <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-            <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Location</p>
-            <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">Yogyakarta, ID</p>
-          </div>
-          <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-            <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Education</p>
-            <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">UGM, Info. Tech.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-            <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Focus</p>
-            <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">Frontend & Web</p>
-          </div>
-          <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-            <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Status</p>
-            <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">Open to work</p>
-          </div>
+          {location && (
+            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+              <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Location</p>
+              <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">{location}</p>
+            </div>
+          )}
+          {education && (
+            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+              <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Education</p>
+              <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">{education}</p>
+            </div>
+          )}
+          {focus && (
+            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+              <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Focus</p>
+              <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">{focus}</p>
+            </div>
+          )}
+          {status && (
+            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+              <p class="font-mono text-xs text-zinc-400 dark:text-zinc-600 mb-1">Status</p>
+              <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">{status}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
