@@ -10,7 +10,7 @@ interface Props {
 const {
   title = 'Muhammad Zulfa Dhiaulhaq — Software Engineer',
   description = 'Portfolio of Muhammad Zulfa Dhiaulhaq, a Software Engineer based in Yogyakarta, Indonesia.',
-  ogImage = '/images/iZ.png',
+  ogImage = '/images/Zul.png',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://izuul.dev');
@@ -50,6 +50,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://izuul.de
         const theme = localStorage.getItem('theme');
         if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
         }
       })();
     </script>

@@ -4,9 +4,7 @@ interface Props {
 }
 const { name } = Astro.props;
 
-const initials = name
-  ? name.split(' ').slice(0, 2).map((n: string) => n[0]).join('')
-  : 'iZ';
+const initials = 'Zul';
 
 const navLinks = [
   { href: '#about', label: 'About' },
